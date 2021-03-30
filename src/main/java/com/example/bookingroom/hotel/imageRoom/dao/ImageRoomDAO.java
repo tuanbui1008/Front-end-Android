@@ -1,2 +1,4 @@
-package com.example.bookingroom.hotel.imageRoom.dao;public interface ImageRoomDO {
+package com.example.bookingroom.hotel.imageRoom.dao;
+
+public interface ImageRoomDAO {
 }

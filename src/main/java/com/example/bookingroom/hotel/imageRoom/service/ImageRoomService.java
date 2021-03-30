@@ -1,7 +1,7 @@
-package com.example.bookingroom.hotel.imageRoom.service;/**
-Created by NhanNguyen on 3/25/2021
-@author: NhanNguyen
-@date: 3/25/2021
-*/
+package com.example.bookingroom.hotel.imageRoom.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
 public class ImageRoomService {
 }

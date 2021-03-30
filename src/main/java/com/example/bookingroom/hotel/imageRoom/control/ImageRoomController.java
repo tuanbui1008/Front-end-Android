@@ -1,7 +1,9 @@
-package com.example.bookingroom.hotel.imageRoom.control;/**
-Created by NhanNguyen on 3/25/2021
-@author: NhanNguyen
-@date: 3/25/2021
-*/
-public class ImgeRoomController {
+package com.example.bookingroom.hotel.imageRoom.control;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("api/image-room")
+public class ImageRoomController {
 }
