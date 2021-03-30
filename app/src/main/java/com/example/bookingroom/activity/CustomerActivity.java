@@ -34,6 +34,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bookingroom.R;
@@ -46,6 +47,8 @@ import com.example.bookingroom.model.dbo.Customer;
 import com.example.bookingroom.model.dbo.Hotel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -97,6 +100,10 @@ public class CustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer);
         init();
         initHandler();
+        getAllArea(Constant.URL_SELECT_ALL_AREA);
+        getAllDataHotel(Constant.URL_SELECT_ALL_DATA_HOTEL);
+        customPagerAdapter();
+        eventNav();
 
     }
 
@@ -121,6 +128,7 @@ public class CustomerActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
+
     private void initHandler() {
         handler = new Handler() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -205,6 +213,18 @@ public class CustomerActivity extends AppCompatActivity {
                     }
                     case 6: {
                         getAllHotelByArea(Constant.ID_NHA_TRANG);
+                        break;
+                    }
+                    case 7: {
+                        getAllHotelByArea(Constant.ID_CAT_BA);
+                        break;
+                    }
+                    case 8: {
+                        getAllHotelByArea(Constant.ID_QUY_NHON);
+                        break;
+                    }
+                    case 9: {
+                        getAllHotelByArea(Constant.ID_PHU_QUOC);
                         break;
                     }
                 }
@@ -350,33 +370,38 @@ public class CustomerActivity extends AppCompatActivity {
             public void run() {
                 List<Area> list = new ArrayList<>();
                 RequestQueue requestQueue = Volley.newRequestQueue(CustomerActivity.this);
-                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                        new Response.Listener<JSONArray>() {
+                JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(JSONArray response) {
-                                JSONObject jsonObject = new JSONObject();
-
-                                for (int i = 0; i < response.length(); i++) {
-                                    try {
-                                        jsonObject = response.getJSONObject(i);
-                                        list.add(new Area(
-                                                jsonObject.getInt("id"),
-                                                jsonObject.getString("name")
-                                        ));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                            public void onResponse(JSONObject response) {
+                                JSONArray jsonArray = null;
+                                try {
+                                    jsonArray = (JSONArray) response.get("data");
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        try {
+                                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                            list.add(new Area(
+                                                    jsonObject.getInt("id"),
+                                                    jsonObject.getString("name")
+                                            ));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
+                                    Message msg = new Message();
+                                    msg.what = MESSAGE_GET_INFO_AREA;
+                                    msg.obj = list;
+                                    handler.sendMessage(msg);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-                                Message msg = new Message();
-                                msg.what = MESSAGE_GET_INFO_AREA;
-                                msg.obj = list;
-                                handler.sendMessage(msg);
+
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-
+                                Toast.makeText(CustomerActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                 );
@@ -391,30 +416,35 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 RequestQueue requestQueue = Volley.newRequestQueue(CustomerActivity.this);
-                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                        new Response.Listener<JSONArray>() {
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(JSONArray response) {
-                                JSONObject jsonObject = new JSONObject();
-                                List<Hotel> hotels = new ArrayList<>();
-                                for (int i = 0; i < response.length(); i++) {
-                                    try {
-                                        jsonObject = response.getJSONObject(i);
-                                        hotels.add(new Hotel(
-                                                jsonObject.getInt("id"),
-                                                jsonObject.getInt("idArea"),
-                                                jsonObject.getString("name"),
-                                                jsonObject.getString("address"),
-                                                jsonObject.getString("image")
-                                        ));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    JSONArray jsonArray = (JSONArray) response.get("data");
+                                    List<Hotel> hotels = new ArrayList<>();
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        try {
+                                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                            hotels.add(new Hotel(
+                                                    jsonObject.getInt("id"),
+                                                    jsonObject.getInt("idArea"),
+                                                    jsonObject.getString("name"),
+                                                    jsonObject.getString("address"),
+                                                    jsonObject.getString("image")
+                                            ));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Message msg = new Message();
+                                        msg.what = MESSAGE_GET_DATA_HOTEL;
+                                        msg.obj = hotels;
+                                        handler.sendMessage(msg);
                                     }
-                                    Message msg = new Message();
-                                    msg.what = MESSAGE_GET_DATA_HOTEL;
-                                    msg.obj = hotels;
-                                    handler.sendMessage(msg);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -424,7 +454,7 @@ public class CustomerActivity extends AppCompatActivity {
                             }
                         }
                 );
-                requestQueue.add(jsonArrayRequest);
+                requestQueue.add(jsonObjectRequest);
             }
         });
         thread.start();
