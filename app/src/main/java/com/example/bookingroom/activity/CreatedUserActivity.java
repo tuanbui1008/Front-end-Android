@@ -137,9 +137,9 @@ public class CreatedUserActivity extends AppCompatActivity {
                                 intent.putExtra("gmail", layout_gmail.getEditText().getText().toString().trim());
                                 intent.putExtra("password", layout_password.getEditText().getText().toString().trim());
                                 if (rd_male.isChecked()) {
-                                    intent.putExtra("gender", true);
+                                    intent.putExtra("gender", "Nam");
                                 } else if (rd_female.isChecked()) {
-                                    intent.putExtra("gender", false);
+                                    intent.putExtra("gender", "Nữ");
                                 }
                                 intent.putExtra("code_check", codeAccept);
                                 startActivity(intent);
@@ -163,12 +163,6 @@ public class CreatedUserActivity extends AppCompatActivity {
                     }
                 }
         ) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> param = new HashMap<>();
-//                param.put("gmail", layout_gmail.getEditText().getText().toString());
-//                return param;
-//            }
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

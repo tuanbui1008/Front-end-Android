@@ -9,11 +9,19 @@ public class Customer implements Serializable {
     private String customerName;
     private String gmail;
     private String address;
-    private boolean gender;
+    private String gender;
     private String avatar;
     private Date DOB;
 
     public Customer() {
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getId() {
@@ -56,13 +64,7 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    public boolean isGender() {
-        return gender;
-    }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
 
     public String getAvatar() {
         return avatar;

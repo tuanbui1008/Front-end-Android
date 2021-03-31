@@ -62,6 +62,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -115,7 +116,7 @@ public class CustomerActivity extends AppCompatActivity {
         nav_page = findViewById(R.id.nav_page);
         spinnerArea = findViewById(R.id.spinner_area);
         Intent intent = getIntent();
-        gmail = intent.getStringExtra("gmail");
+        gmail = intent.getStringExtra(Constant.KEY.KEY_GMAIL);
         itemSlides = new ArrayList<>();
         itemSlides.add(new ItemSlide(R.drawable.item_slide_page1));
         itemSlides.add(new ItemSlide(R.drawable.item_slide_page2));
@@ -305,19 +306,19 @@ public class CustomerActivity extends AppCompatActivity {
                     case R.id.log_out: {
                         finish();
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                        Toast.makeText(CustomerActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CustomerActivity.this, Constant.MESSAGE.LOGOUT_SUCCESS, Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.profile: {
                         Intent intent = new Intent(CustomerActivity.this, InfoCustomerActivity.class);
-                        intent.putExtra("customer", customer);
+                        intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
                         startActivity(intent);
                         break;
                     }
                     case R.id.changePassword: {
                         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-                        intent.putExtra("password", customer.getPassword());
-                        intent.putExtra("gmail", customer.getGmail());
+                        intent.putExtra(Constant.KEY.KEY_PASSWORD, customer.getPassword());
+                        intent.putExtra(Constant.KEY.KEY_GMAIL, customer.getGmail());
                         startActivity(intent);
                         break;
                     }
@@ -328,37 +329,37 @@ public class CustomerActivity extends AppCompatActivity {
     }
 
     private void getInfoCustomer(String url) {
+        Map<String, String> param = new HashMap<>();
+        param.put("gmail", gmail);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 RequestQueue requestQueue = Volley.newRequestQueue(CustomerActivity.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(param),
+                        new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(String response) {
-                                if (!response.toString().isEmpty()) {
-                                    Message msg = new Message();
-                                    msg.what = MESSAGE_GET_INFO_CUSTOMER;
-                                    msg.obj = setInfoCustomer(response.toString());
-                                    handler.sendMessage(msg);
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    String code = (String) response.get("code");
+                                    if (code.equals("success")){
+                                        Message msg = new Message();
+                                        msg.what = MESSAGE_GET_INFO_CUSTOMER;
+                                        msg.obj = convertCustomer((JSONObject) response.get("data"));
+                                        handler.sendMessage(msg);
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(CustomerActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
                                 }
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-
+                                Toast.makeText(CustomerActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> param = new HashMap<>();
-                        param.put("gmail", getNameGmail(gmail));
-                        return super.getParams();
-                    }
-                };
-                requestQueue.add(stringRequest);
+                );
+                requestQueue.add(request);
             }
         });
         thread.start();
@@ -460,35 +461,27 @@ public class CustomerActivity extends AppCompatActivity {
         thread.start();
     }
 
-    private String getNameGmail(String gmail) {
-        String[] arr = gmail.split("\\@");
-        return arr[0];
-    }
+//    private String getNameGmail(String gmail) {
+//        String[] arr = gmail.split("\\@");
+//        return arr[0];
+//    }
 
-    private Customer setInfoCustomer(String s) {
+    private Customer convertCustomer(JSONObject object) {
         SimpleDateFormat format = new SimpleDateFormat(Constant.FORMAT_DATE);
         Customer customerRequest = new Customer();
         try {
-            JSONObject object = new JSONObject(s);
             customerRequest.setId(Integer.parseInt(object.getString("id")));
-            customerRequest.setCustomerName(object.getString("customerName"));
-            customerRequest.setPassword(object.getString("password"));
+            customerRequest.setCustomerName(object.getString("fullName"));
+            customerRequest.setPassword(object.getString("passwordHash"));
             customerRequest.setGmail(object.getString("gmail"));
             customerRequest.setAddress(object.getString("address"));
-            if (object.getString("gender").equals("1")) {
-                customerRequest.setGender(true);
-            } else {
-                customerRequest.setGender(false);
-            }
+            customerRequest.setGender(object.getString("gender"));
             customerRequest.setAvatar(object.getString("avatar"));
-
-            if (!object.getString("DOB").equals("null")) {
-                customerRequest.setDOB(format.parse(object.getString("DOB")));
+            if (Objects.nonNull(object.get("dob"))) {
+                customerRequest.setDOB(format.parse(object.getString("dob")));
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(Constant.TAG, e.getMessage());
         }
         return customerRequest;
     }
