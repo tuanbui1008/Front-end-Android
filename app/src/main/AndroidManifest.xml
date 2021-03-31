@@ -15,11 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CheckGmailActivity"></activity>
+        <activity android:name=".activity.BookRoomActivity"></activity>
+        <activity android:name=".activity.CheckGmailActivity" />
         <activity android:name=".activity.InfoHotelActivity" />
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.InfoCustomerActivity" />
-         <activity android:name=".activity.CustomerActivity" />
+        <activity android:name=".activity.CustomerActivity" />
         <activity android:name=".activity.CreatedUserActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.ThemeActivity">

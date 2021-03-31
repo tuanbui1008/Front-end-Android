@@ -1,9 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.InfoHotelActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_weight="1">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager_hotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/view_pager_hotel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    app:tabBackground="@drawable/indicator_flag"
+                    app:tabGravity="center" />
+            </RelativeLayout>
+
+        </TableRow>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view_pager_hotel"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_name_hotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pager_hotel"
+                android:textColor="@color/colorBlue"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/lbl_address_hotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pager_hotel"
+                android:drawableStart="@drawable/icon_address"
+                android:drawablePadding="10dp"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_type_room"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </androidx.recyclerview.widget.RecyclerView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/service1" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/service2" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/service3" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/service3" />
+        </TableRow>
+        <TableRow>
+            <RelativeLayout
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/avt_cmt"
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="25dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/icon_avt"
+                        android:src="@drawable/avatar_default"
+                        android:scaleType="centerCrop"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
+                </androidx.cardview.widget.CardView>
+                <EditText
+                    android:id="@+id/ed_cmt"
+                    android:layout_toRightOf="@id/avt_cmt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:text="Gửi"
+                    android:textAllCaps="false"
+                    android:textSize="35sp"
+                    android:layout_width="150dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/ed_cmt"
+                    style="@style/btn_event"/>
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_cmt"
+                android:layout_width="339dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"></androidx.recyclerview.widget.RecyclerView>
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>
