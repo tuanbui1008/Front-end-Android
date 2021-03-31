@@ -137,9 +137,9 @@ public class CreatedUserActivity extends AppCompatActivity {
                                 intent.putExtra("gmail", layout_gmail.getEditText().getText().toString().trim());
                                 intent.putExtra("password", layout_password.getEditText().getText().toString().trim());
                                 if (rd_male.isChecked()) {
-                                    intent.putExtra("gender", "Nam");
+                                    intent.putExtra("gender", Constant.KEY.KEY_MALE);
                                 } else if (rd_female.isChecked()) {
-                                    intent.putExtra("gender", "Nữ");
+                                    intent.putExtra("gender", Constant.KEY.KEY_FEMALE);
                                 }
                                 intent.putExtra("code_check", codeAccept);
                                 startActivity(intent);

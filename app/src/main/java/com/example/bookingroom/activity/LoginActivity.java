@@ -149,10 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
         );
         requestQueue.add(jsonObjectRequest);
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                6000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     private void even_forgot_psw() {

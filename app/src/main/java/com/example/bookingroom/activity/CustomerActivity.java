@@ -289,7 +289,7 @@ public class CustomerActivity extends AppCompatActivity {
         gmail_customer = headerView.findViewById(R.id.gmail_customer);
         name_customer.setText(customer.getCustomerName());
         gmail_customer.setText(customer.getGmail());
-        if (customer.getAvatar().equals("null")) {
+        if (Objects.nonNull(customer.getAvatar()) || customer.getAvatar().isEmpty()) {
             avatar_customer.setImageResource(R.drawable.avatar_default);
         } else {
             Picasso.get().load(customer.getAvatar()).into(avatar_customer);
@@ -317,8 +317,9 @@ public class CustomerActivity extends AppCompatActivity {
                     }
                     case R.id.changePassword: {
                         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-                        intent.putExtra(Constant.KEY.KEY_PASSWORD, customer.getPassword());
-                        intent.putExtra(Constant.KEY.KEY_GMAIL, customer.getGmail());
+//                        intent.putExtra(Constant.KEY.KEY_PASSWORD, customer.getPassword());
+//                        intent.putExtra(Constant.KEY.KEY_GMAIL, customer.getGmail());
+                        intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
                         startActivity(intent);
                         break;
                     }
@@ -386,7 +387,7 @@ public class CustomerActivity extends AppCompatActivity {
                                                     jsonObject.getString("name")
                                             ));
                                         } catch (JSONException e) {
-                                            e.printStackTrace();
+                                           Log.e(Constant.TAG, e.getMessage());
                                         }
                                     }
                                     Message msg = new Message();
@@ -394,7 +395,7 @@ public class CustomerActivity extends AppCompatActivity {
                                     msg.obj = list;
                                     handler.sendMessage(msg);
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                   Log.e(Constant.TAG, e.getMessage());
                                 }
 
                             }
@@ -435,7 +436,7 @@ public class CustomerActivity extends AppCompatActivity {
                                                     jsonObject.getString("image")
                                             ));
                                         } catch (JSONException e) {
-                                            e.printStackTrace();
+                                           Log.e(Constant.TAG, e.getMessage());
                                         }
                                         Message msg = new Message();
                                         msg.what = MESSAGE_GET_DATA_HOTEL;
@@ -443,7 +444,7 @@ public class CustomerActivity extends AppCompatActivity {
                                         handler.sendMessage(msg);
                                     }
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                   Log.e(Constant.TAG, e.getMessage());
                                 }
 
                             }
@@ -460,11 +461,6 @@ public class CustomerActivity extends AppCompatActivity {
         });
         thread.start();
     }
-
-//    private String getNameGmail(String gmail) {
-//        String[] arr = gmail.split("\\@");
-//        return arr[0];
-//    }
 
     private Customer convertCustomer(JSONObject object) {
         SimpleDateFormat format = new SimpleDateFormat(Constant.FORMAT_DATE);
