@@ -6,9 +6,8 @@ public class Constant {
     public static final String SUBJECT_SEND = "Booking Room";
     public static final String FORMAT_DATE = "yyyy-MM-dd";
     public static final String TAG = "Message";
-    //    public static final String IP_ADDRESS = "192.168.1.214";
-//    public static final String IP_ADDRESS = "localhost";
-    public static final String IP_ADDRESS = "172.1.2.120";
+        public static final String IP_ADDRESS = "192.168.1.214";
+//    public static final String IP_ADDRESS = "172.1.2.120";
 //    public static final String IP_ADDRESS = "172.1.1.196";
 //    public static final String IP_ADDRESS = "192.168.43.113";
 
@@ -20,6 +19,13 @@ public class Constant {
         public static final String KEY_CUSTOMER = "Customer";
         public static final String KEY_MALE = "Nam";
         public static final String KEY_FEMALE = "Nữ";
+        public static final String KEY_TYPE_ROOM = "Type Room";
+        public static final String KEY_CONTENT = "content";
+        public static final String KEY_HOTEl = "hotel";
+        public static final String KEY_CODE_SUCCESS = "success";
+        public static final String KEY_CODE_CONFIRM = "confirm";
+        public static final String KEY_CODE_ACCEPT = "Code";
+        public static final String KEY_CONFIRM_NEW_PASSWORD = "confirm_new_password";
     }
 
     public static class Title{
@@ -27,6 +33,7 @@ public class Constant {
         public static final String LOADING_UPDATE = "Đang cập nhật";
         public static final String LOADING_CHANGE = "Đang đổi mật khẩu";
         public static final String LOGIN = "Đăng Nhập";
+        public static final String CHECK = "Đang kiểm tra";
     }
     public static class MESSAGE {
         public static final String CHECK_INFO = "Kiểm tra lại thông tin";
@@ -71,14 +78,16 @@ public class Constant {
     public static final String URL_LOGIN = "http://" + IP_ADDRESS + ":8080/api/customer/login";
     public static final String URL_SELECT_INFO_CUSTOMER = "http://" + IP_ADDRESS + ":8080/api/customer";
     public static final String URL_UPDATE_INFO_CUSTOMER = "http://" + IP_ADDRESS + ":8080/api/customer/update";
-    public static final String URL_CHECK_GMAIL = "https://xixonknight.000webhostapp.com/query_booking_room/CheckGmail.php";
+//    public static final String URL_CHECK_GMAIL = "https://xixonknight.000webhostapp.com/query_booking_room/CheckGmail.php";
 //    public static final String URL_UPDATE_PASSWORD = "https://xixonknight.000webhostapp.com/query_booking_room/UpdatePasswordCustomer.php";
     public static final String URL_SELECT_ALL_AREA = "http://" + IP_ADDRESS + ":8080/api/area/get-all";
     public static final String URL_SELECT_ALL_CATEGORY = "https://xixonknight.000webhostapp.com/query_booking_room/SelectAllCategory.php";
-    public static final String URL_CHECK_CREATE_GMAIL = "http://" + IP_ADDRESS + ":8080/api/customer/confirm-gmail";
+    public static final String URL_CHECK_EXIST_GMAIL = "http://" + IP_ADDRESS + ":8080/api/customer/confirm-gmail";
     public static final String URL_SELECT_ALL_DATA_HOTEL = "http://" + IP_ADDRESS + ":8080/api/hotel/get-all";
-    public static final String URL_SELECT_IMAGE_HOTEL = "https://xixonknight.000webhostapp.com/query_booking_room/SelectImageHotel.php";
-    public static final String URL_SELECT_TYPE_ROOM = "https://xixonknight.000webhostapp.com/query_booking_room/SelectTypeRoom.php";
+    public static final String URL_SELECT_IMAGE_HOTEL = "http://" + IP_ADDRESS + ":8080/api/image-room";
+    public static final String URL_SELECT_TYPE_ROOM = "http://" + IP_ADDRESS + ":8080/api/category/getByIdHotel";
+    public static final String URL_GET_COMMENT = "http://" + IP_ADDRESS + ":8080/api/comment/getComments";
+    public static final String URL_ADD_COMMENT = "http://" + IP_ADDRESS + ":8080/api/comment/add";
 
 
 

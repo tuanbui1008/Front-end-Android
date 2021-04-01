@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                         String code = null;
                         try {
                             code = (String) response.get("code");
-                            if (code.equals("success")) {
+                            if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                 Intent intent = new Intent(getApplicationContext(), CustomerActivity.class);
                                 intent.putExtra(Constant.KEY.KEY_GMAIL, layout_email.getEditText().getText().toString());
                                 progressDialog.dismiss();
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void even_forgot_psw() {
         finish();
-        startActivity(new Intent(LoginActivity.this, CreatedUserActivity.class));
+        startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
     }
 
     private boolean checkEmail() {

@@ -342,7 +342,7 @@ public class CustomerActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     String code = (String) response.get("code");
-                                    if (code.equals("success")){
+                                    if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)){
                                         Message msg = new Message();
                                         msg.what = MESSAGE_GET_INFO_CUSTOMER;
                                         msg.obj = convertCustomer((JSONObject) response.get("data"));
@@ -497,7 +497,8 @@ public class CustomerActivity extends AppCompatActivity {
 
     public void setClickRecyclerView(Hotel hotel) {
         Intent intent = new Intent(this, InfoHotelActivity.class);
-        intent.putExtra("hotel", hotel);
+        intent.putExtra(Constant.KEY.KEY_HOTEl, hotel);
+        intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
         startActivity(intent);
     }
 }

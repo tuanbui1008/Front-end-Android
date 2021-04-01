@@ -121,13 +121,13 @@ public class CreatedUserActivity extends AppCompatActivity {
         Map<String, String> param = new HashMap<>();
         param.put("gmail", layout_gmail.getEditText().getText().toString());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                Constant.URL_CHECK_CREATE_GMAIL, new JSONObject(param),
+                Constant.URL_CHECK_EXIST_GMAIL, new JSONObject(param),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             String code = (String) response.get("code");
-                            if (code.equals("success")) {
+                            if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                 progressDialog.dismiss();
                                 layout_gmail.setError(null);
                                 int codeAccept = new RandomCode().randomCode(MIN, MAX);

@@ -75,7 +75,7 @@ public class CheckGmailActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             String code = (String) response.get("code");
-                            if (code.equals("success")) {
+                            if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                                 finish();
                             } else {

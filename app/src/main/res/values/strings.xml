@@ -6,6 +6,7 @@
     <string name="hint_password">************</string>
     <string name="remember">Nhớ tài khoản</string>
     <string name="forgot_psw">Quên mật khẩu</string>
+    <string name="review">Nhận xét</string>
     <string name="btn_login">Đăng Nhập</string>
     <string name="create_user">Tạo tài khoản</string>
     <string name="ed_create_user_name">Tên tài khoản</string>

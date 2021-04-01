@@ -3,6 +3,7 @@ package com.example.bookingroom.model;
 import java.io.Serializable;
 
 public class TypeRoom implements Serializable {
+    private int id;
     private int image;
     private String lblName;
     private int price;

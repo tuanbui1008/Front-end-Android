@@ -135,7 +135,7 @@ public class InfoCustomerActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             String code = (String) response.get("code");
-                            if (code.equals("success")) {
+                            if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                 finish();
                                 Toast.makeText(InfoCustomerActivity.this, Constant.MESSAGE.UPDATE_SUCCESS, Toast.LENGTH_SHORT).show();
                             } else {

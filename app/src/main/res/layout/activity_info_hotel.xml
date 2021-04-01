@@ -136,6 +136,7 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"/>
                 <Button
+                    android:id="@+id/btn_send"
                     android:layout_marginTop="20dp"
                     android:text="Gửi"
                     android:textAllCaps="false"
@@ -148,13 +149,24 @@
         </TableRow>
 
         <TableRow android:layout_width="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_cmt"
-                android:layout_width="339dp"
+            <TextView
+                android:id="@+id/lbl_forgot_psw"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_alignParentRight="true"
+                android:text="@string/review"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorBlue"
+                android:textSize="30dp"
+                android:textStyle="italic" />
         </TableRow>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/list_cmt"
+            android:layout_width="339dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"></androidx.recyclerview.widget.RecyclerView>
     </TableLayout>
 
 </ScrollView>
