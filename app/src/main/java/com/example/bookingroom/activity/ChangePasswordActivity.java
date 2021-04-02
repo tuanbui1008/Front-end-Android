@@ -6,16 +6,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.bookingroom.R;
 import com.example.bookingroom.constants.Constant;
@@ -25,22 +25,29 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
     private TextInputLayout layout_psw_old, layout_psw_new, layout_psw_confirm;
+    private TextView lblCurrentPas;
     private Button btn_change;
     private ProgressDialog progressDialog;
     private Customer customer;
+    private String gmail;
+    private boolean keyChange = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        getDataIntent();
         init();
         initDialog();
         event();
@@ -61,8 +68,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void changePasswordNew() {
-        if (checkPasswordOdl()) {
-            if (checkPasswordConfirm()) {
+
+        if (keyChange) {
+            if (checkPasswordConfirm()){
+                progressDialog.show();
+                sendRequest(Constant.URL_UPDATE_INFO_CUSTOMER);
+            }
+        }else {
+            if (checkPasswordOdl() && checkPasswordConfirm()) {
                 progressDialog.show();
                 sendRequest(Constant.URL_UPDATE_INFO_CUSTOMER);
             }
@@ -75,6 +88,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         params.put("gmail", customer.getGmail());
         params.put("id", String.valueOf(customer.getId()));
         params.put("fullName", customer.getCustomerName());
+        params.put("gender", customer.getGender());
         params.put("address", customer.getAddress());
         params.put("dob", format.format(customer.getDOB()));
         params.put("avatar", "");
@@ -88,13 +102,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             String code = (String) response.get("code");
                             if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                 finish();
+                                if (keyChange){
+                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                }
                                 Toast.makeText(ChangePasswordActivity.this, Constant.MESSAGE.CHANGE_PASSWORD_SUCCESS, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(ChangePasswordActivity.this, Constant.MESSAGE.CHANGE_PASSWORD_ERROR, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             Log.e(Constant.TAG, e.getMessage());
-                        }finally {
+                        } finally {
                             progressDialog.dismiss();
 
                         }
@@ -150,17 +167,82 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     }
 
+    private void getDataIntent(){
+        Intent intent = getIntent();
+        keyChange = intent.getBooleanExtra(Constant.KEY.KEY_CONFIRM_NEW_PASSWORD,false);
+        if (keyChange){
+
+            gmail = intent.getStringExtra(Constant.KEY.KEY_GMAIL);
+            getCustomerByGmail(gmail);
+        }else {
+            customer = (Customer) intent.getSerializableExtra(Constant.KEY.KEY_CUSTOMER);
+        }
+    }
+
+    private void getCustomerByGmail(String gmail){
+        SimpleDateFormat format = new SimpleDateFormat(Constant.FORMAT_DATE);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Object> params = new HashMap<>();
+                params.put("gmail", gmail);
+                RequestQueue request = Volley.newRequestQueue(ChangePasswordActivity.this);
+                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, Constant.URL_SELECT_INFO_CUSTOMER, new JSONObject(params),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject res) {
+                                try {
+                                    String code = res.getString("code");
+                                    if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)){
+                                        JSONObject object = res.getJSONObject("data");
+                                        customer = new Customer();
+                                        customer.setId(object.getInt("id"));
+                                        customer.setCustomerName(object.getString("fullName"));
+                                        customer.setGmail(object.getString("gmail"));
+                                        customer.setAddress(object.getString("address"));
+                                        customer.setGender(object.getString("gender"));
+                                        customer.setAvatar(object.getString("avatar"));
+                                        if (Objects.nonNull(object.get("dob"))) {
+                                            customer.setDOB(format.parse(object.getString("dob")));
+                                        }
+                                    }
+                                    else {
+                                        Toast.makeText(ChangePasswordActivity.this,Constant.MESSAGE.NOT_FIND,Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                } catch (ParseException e) {
+                                    Toast.makeText(ChangePasswordActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(ChangePasswordActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                request.add(req);
+            }
+        });
+        thread.start();
+    }
     private void init() {
         layout_psw_old = findViewById(R.id.layout_psw_old);
         layout_psw_new = findViewById(R.id.layout_psw_new);
         layout_psw_confirm = findViewById(R.id.layout_psw_confirm);
         btn_change = findViewById(R.id.btn_change);
-        Intent intent = getIntent();
-        customer = (Customer) intent.getSerializableExtra(Constant.KEY.KEY_CUSTOMER);
+        lblCurrentPas = findViewById(R.id.lblCurrentPas);
+        if (keyChange){
+            lblCurrentPas.setVisibility(View.GONE);
+            layout_psw_old.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onBackPressed() {
         finish();
     }
+
+
 }

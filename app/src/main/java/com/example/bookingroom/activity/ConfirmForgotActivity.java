@@ -30,7 +30,7 @@ public class ConfirmForgotActivity extends AppCompatActivity {
             if (check == codeAccept) {
                 Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 intent.putExtra(Constant.KEY.KEY_GMAIL, nameGmail);
-                intent.putExtra(Constant.KEY.KEY_CODE_CONFIRM, true);
+                intent.putExtra(Constant.KEY.KEY_CONFIRM_NEW_PASSWORD, true);
                 startActivity(intent);
                 finish();
             } else {

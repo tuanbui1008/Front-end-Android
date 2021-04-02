@@ -16,10 +16,18 @@ public class TypeRoom implements Serializable {
         this.price = price;
     }
 
-    public TypeRoom(int image, String lblName, int price) {
-        this.image = image;
+    public TypeRoom(int id, String lblName, int price) {
+        this.id = id;
         this.lblName = lblName;
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getImage() {

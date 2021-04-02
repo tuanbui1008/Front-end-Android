@@ -4,21 +4,12 @@ public class Room {
     private int id;
     private int idCategories;
     private int idHotel;
-    private int roomCode;
+    private String roomCode;
     private double price;
     private int amount_max;
     private String image;
 
     public Room() {
-    }
-
-    public Room(int id, int idCategories, int idHotel, int roomCode, double price, int amount_max) {
-        this.id = id;
-        this.idCategories = idCategories;
-        this.idHotel = idHotel;
-        this.roomCode = roomCode;
-        this.price = price;
-        this.amount_max = amount_max;
     }
 
     public int getId() {
@@ -45,11 +36,11 @@ public class Room {
         this.idHotel = idHotel;
     }
 
-    public int getRoomCode() {
+    public String getRoomCode() {
         return roomCode;
     }
 
-    public void setRoomCode(int roomCode) {
+    public void setRoomCode(String roomCode) {
         this.roomCode = roomCode;
     }
 
@@ -67,6 +58,14 @@ public class Room {
 
     public void setAmount_max(int amount_max) {
         this.amount_max = amount_max;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 

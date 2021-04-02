@@ -2,30 +2,30 @@ package com.example.bookingroom.model.dbo;
 
 import java.util.Date;
 
-public class Registration {
-    private int idRegistration;
+public class BookRoom {
+    private int id;
     private int idCustomer;
-    private Date dateRegistration;
+    private Date dateRegister;
     private Date dateOfArrival;
     private Date dateGo;
 
-    public Registration() {
+    public BookRoom() {
     }
 
-    public Registration(int idRegistration, int idCustomer, Date dateRegistration, Date dateOfArrival, Date dateGo) {
-        this.idRegistration = idRegistration;
+    public BookRoom(int id, int idCustomer, Date dateRegister, Date dateOfArrival, Date dateGo) {
+        this.id = id;
         this.idCustomer = idCustomer;
-        this.dateRegistration = dateRegistration;
+        this.dateRegister = dateRegister;
         this.dateOfArrival = dateOfArrival;
         this.dateGo = dateGo;
     }
 
-    public int getIdRegistration() {
-        return idRegistration;
+    public int getId() {
+        return id;
     }
 
-    public void setIdRegistration(int idRegistration) {
-        this.idRegistration = idRegistration;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIdCustomer() {
@@ -36,12 +36,12 @@ public class Registration {
         this.idCustomer = idCustomer;
     }
 
-    public Date getDateRegistration() {
-        return dateRegistration;
+    public Date getDateRegister() {
+        return dateRegister;
     }
 
-    public void setDateRegistration(Date dateRegistration) {
-        this.dateRegistration = dateRegistration;
+    public void setDateRegister(Date dateRegister) {
+        this.dateRegister = dateRegister;
     }
 
     public Date getDateOfArrival() {

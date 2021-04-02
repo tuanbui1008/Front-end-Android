@@ -33,7 +33,9 @@ public class Constant {
         public static final String LOADING_UPDATE = "Đang cập nhật";
         public static final String LOADING_CHANGE = "Đang đổi mật khẩu";
         public static final String LOGIN = "Đăng Nhập";
+        public static final String BOOK_ROOM = "Đặt phòng";
         public static final String CHECK = "Đang kiểm tra";
+        public static final String Chose = "Hãy Chọn";
     }
     public static class MESSAGE {
         public static final String CHECK_INFO = "Kiểm tra lại thông tin";
@@ -52,6 +54,9 @@ public class Constant {
         public static final String UPDATE_ERROR = "Lỗi cập nhật";
         public static final String CHANGE_PASSWORD_SUCCESS = "Đổi mật khẩu thành công";
         public static final String CHANGE_PASSWORD_ERROR = "Lỗi đổi mật khẩu";
+        public static final String NOT_FIND = "Không tìm thấy data";
+        public static final String BOOK_SUCCESS = "Đặt phòng thành công";
+        public static final String BOOK_FAIL = "Đặt phòng thất bại";
     }
 
     //    id Area
@@ -88,6 +93,8 @@ public class Constant {
     public static final String URL_SELECT_TYPE_ROOM = "http://" + IP_ADDRESS + ":8080/api/category/getByIdHotel";
     public static final String URL_GET_COMMENT = "http://" + IP_ADDRESS + ":8080/api/comment/getComments";
     public static final String URL_ADD_COMMENT = "http://" + IP_ADDRESS + ":8080/api/comment/add";
+    public static final String URL_GET_LST_ROOM = "http://" + IP_ADDRESS + ":8080/api/room/getRoom";
+    public static final String URL_BOOK_ROOM = "http://" + IP_ADDRESS + ":8080/api/book-room/add";
 
 
 

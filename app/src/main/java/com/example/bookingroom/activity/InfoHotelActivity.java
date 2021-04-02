@@ -353,6 +353,7 @@ public class InfoHotelActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), BookRoomActivity.class);
         intent.putExtra(Constant.KEY.KEY_TYPE_ROOM, typeRoom);
         intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
+        intent.putExtra(Constant.KEY.KEY_HOTEl, hotel);
         startActivity(intent);
     }
 
