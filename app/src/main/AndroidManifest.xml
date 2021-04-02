@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ConfirmForgotActivity"></activity>
+        <activity android:name=".activity.HistoryActivity"></activity>
+        <activity android:name=".activity.ConfirmForgotActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.BookRoomActivity" />
         <activity android:name=".activity.CheckGmailActivity" />

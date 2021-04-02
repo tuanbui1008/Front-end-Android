@@ -317,8 +317,12 @@ public class CustomerActivity extends AppCompatActivity {
                     }
                     case R.id.changePassword: {
                         Intent intent = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-//                        intent.putExtra(Constant.KEY.KEY_PASSWORD, customer.getPassword());
-//                        intent.putExtra(Constant.KEY.KEY_GMAIL, customer.getGmail());
+                        intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
+                        startActivity(intent);
+                        break;
+                    }
+                    case R.id.history:{
+                        Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
                         intent.putExtra(Constant.KEY.KEY_CUSTOMER, customer);
                         startActivity(intent);
                         break;
@@ -345,7 +349,7 @@ public class CustomerActivity extends AppCompatActivity {
                                     if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)){
                                         Message msg = new Message();
                                         msg.what = MESSAGE_GET_INFO_CUSTOMER;
-                                        msg.obj = convertCustomer((JSONObject) response.get("data"));
+                                        msg.obj = convertCustomer(response.getJSONObject(Constant.KEY.KEY_DATA_RES));
                                         handler.sendMessage(msg);
                                     }
                                 } catch (JSONException e) {
@@ -378,7 +382,7 @@ public class CustomerActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 JSONArray jsonArray = null;
                                 try {
-                                    jsonArray = (JSONArray) response.get("data");
+                                    jsonArray = response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         try {
                                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -423,7 +427,7 @@ public class CustomerActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    JSONArray jsonArray = (JSONArray) response.get("data");
+                                    JSONArray jsonArray = response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                     List<Hotel> hotels = new ArrayList<>();
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         try {

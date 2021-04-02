@@ -26,6 +26,7 @@ public class Constant {
         public static final String KEY_CODE_CONFIRM = "confirm";
         public static final String KEY_CODE_ACCEPT = "Code";
         public static final String KEY_CONFIRM_NEW_PASSWORD = "confirm_new_password";
+        public static final String KEY_DATA_RES = "data";
     }
 
     public static class Title{
@@ -95,6 +96,7 @@ public class Constant {
     public static final String URL_ADD_COMMENT = "http://" + IP_ADDRESS + ":8080/api/comment/add";
     public static final String URL_GET_LST_ROOM = "http://" + IP_ADDRESS + ":8080/api/room/getRoom";
     public static final String URL_BOOK_ROOM = "http://" + IP_ADDRESS + ":8080/api/book-room/add";
+    public static final String URL_LOAD_HISTORY = "http://" + IP_ADDRESS + ":8080/api/book-room/getData";
 
 
 

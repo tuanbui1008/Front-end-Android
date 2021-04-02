@@ -217,7 +217,7 @@ public class InfoHotelActivity extends AppCompatActivity {
                                 try {
                                     code = (String) response.get("code");
                                     if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
-                                        JSONArray jsonArray = (JSONArray) response.get("data");
+                                        JSONArray jsonArray = (JSONArray) response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                         for (int i = 0; i < jsonArray.length(); i++) {
                                             String image = convertStringNull(jsonArray.getJSONObject(i).getString("image"));
                                             list.add(new CommentOfCustomer(
@@ -264,7 +264,7 @@ public class InfoHotelActivity extends AppCompatActivity {
                                 try {
                                     String code = (String) response.get("code");
                                     if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
-                                        JSONArray jsonArray = (JSONArray) response.get("data");
+                                        JSONArray jsonArray = response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                         for (int i = 0; i < jsonArray.length(); i++) {
                                             list.add(new ImageRoom(
                                                     jsonArray.getJSONObject(i).getString("image")
@@ -312,7 +312,7 @@ public class InfoHotelActivity extends AppCompatActivity {
                                     if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
                                         List<TypeRoom> list = new ArrayList<>();
                                         try {
-                                            JSONArray jsonArray = (JSONArray) response.get("data");
+                                            JSONArray jsonArray = response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                             for (int i = 0; i < jsonArray.length(); i++) {
                                                 list.add(new TypeRoom(
                                                         jsonArray.getJSONObject(i).getInt("id"),

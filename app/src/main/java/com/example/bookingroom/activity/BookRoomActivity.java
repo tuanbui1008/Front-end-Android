@@ -242,7 +242,7 @@ public class BookRoomActivity extends AppCompatActivity {
                                     String code = response.getString("code");
                                     List<Room> lst = new ArrayList<>();
                                     if (code.equals(Constant.KEY.KEY_CODE_SUCCESS)) {
-                                        JSONArray jsonArray = response.getJSONArray("data");
+                                        JSONArray jsonArray = response.getJSONArray(Constant.KEY.KEY_DATA_RES);
                                         for (int i = 0; i < jsonArray.length(); i++) {
                                             Room room = new Room();
                                             room.setId(jsonArray.getJSONObject(i).getInt("id"));

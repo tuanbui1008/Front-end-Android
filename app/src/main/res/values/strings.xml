@@ -7,6 +7,15 @@
     <string name="remember">Nhớ tài khoản</string>
     <string name="forgot_psw">Quên mật khẩu</string>
     <string name="review">Nhận xét</string>
+    <string name="history">Lịch sử đặt phòng</string>
+    <string name="roomCode">Mã phòng</string>
+    <string name="categoryRoom">Loại Phòng</string>
+    <string name="amountPerson">Số người</string>
+    <string name="amountRoom">Số phòng</string>
+    <string name="dateOfArrival">Ngày đến</string>
+    <string name="dateGo">Ngày đi</string>
+    <string name="createdDate">Ngày đặt</string>
+    <string name="price">Giá</string>
     <string name="btn_login">Đăng Nhập</string>
     <string name="create_user">Tạo tài khoản</string>
     <string name="ed_create_user_name">Tên tài khoản</string>

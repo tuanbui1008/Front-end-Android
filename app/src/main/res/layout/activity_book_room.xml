@@ -27,6 +27,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:paddingLeft="20dp"
         android:id="@+id/layoutContent"
         android:layout_marginTop="10dp"
         android:orientation="vertical"

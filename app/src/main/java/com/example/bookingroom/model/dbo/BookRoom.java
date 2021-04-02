@@ -4,21 +4,18 @@ import java.util.Date;
 
 public class BookRoom {
     private int id;
+    private int idRoom;
     private int idCustomer;
-    private Date dateRegister;
+    private Date createdDate;
     private Date dateOfArrival;
     private Date dateGo;
-
-    public BookRoom() {
-    }
-
-    public BookRoom(int id, int idCustomer, Date dateRegister, Date dateOfArrival, Date dateGo) {
-        this.id = id;
-        this.idCustomer = idCustomer;
-        this.dateRegister = dateRegister;
-        this.dateOfArrival = dateOfArrival;
-        this.dateGo = dateGo;
-    }
+    private int amountPerson;
+    private int amountRoom;
+    private Double price;
+    private String nameHotel;
+    private String address;
+    private String roomCode;
+    private String category;
 
     public int getId() {
         return id;
@@ -26,6 +23,14 @@ public class BookRoom {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdRoom() {
+        return idRoom;
+    }
+
+    public void setIdRoom(int idRoom) {
+        this.idRoom = idRoom;
     }
 
     public int getIdCustomer() {
@@ -36,12 +41,12 @@ public class BookRoom {
         this.idCustomer = idCustomer;
     }
 
-    public Date getDateRegister() {
-        return dateRegister;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDateRegister(Date dateRegister) {
-        this.dateRegister = dateRegister;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Date getDateOfArrival() {
@@ -58,5 +63,61 @@ public class BookRoom {
 
     public void setDateGo(Date dateGo) {
         this.dateGo = dateGo;
+    }
+
+    public int getAmountPerson() {
+        return amountPerson;
+    }
+
+    public void setAmountPerson(int amountPerson) {
+        this.amountPerson = amountPerson;
+    }
+
+    public int getAmountRoom() {
+        return amountRoom;
+    }
+
+    public void setAmountRoom(int amountRoom) {
+        this.amountRoom = amountRoom;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getNameHotel() {
+        return nameHotel;
+    }
+
+    public void setNameHotel(String nameHotel) {
+        this.nameHotel = nameHotel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
