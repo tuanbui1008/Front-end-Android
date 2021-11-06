@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.huawei.agconnect'
 }
 
 android {
@@ -7,7 +8,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.bookingroom"
+        applicationId "com.btl.bookingroom"
         minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
@@ -48,4 +49,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
+
+
 }
