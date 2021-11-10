@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hwads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_drawer"
     android:layout_width="match_parent"
@@ -31,9 +32,14 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            app:tabBackground="@drawable/indicator_flag"
-            app:tabGravity="center" />
-
+            hwads:tabBackground="@drawable/indicator_flag"
+            hwads:tabGravity="center" />
+        <com.huawei.hms.ads.banner.BannerView
+            android:id="@+id/banner_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            hwads:bannerSize="BANNER_SIZE_320_50"
+            />
         <LinearLayout
             android:id="@+id/select_area"
             android:layout_width="match_parent"
@@ -81,8 +87,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu_item">
+        hwads:headerLayout="@layout/nav_header"
+        hwads:menu="@menu/nav_menu_item">
 
     </com.google.android.material.navigation.NavigationView>
 

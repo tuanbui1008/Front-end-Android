@@ -22,6 +22,10 @@ import com.android.volley.toolbox.Volley;
 import com.btl.bookingroom.R;
 import com.btl.bookingroom.constants.Constant;
 import com.google.android.material.textfield.TextInputLayout;
+import com.huawei.hms.ads.AdParam;
+import com.huawei.hms.ads.BannerAdSize;
+import com.huawei.hms.ads.HwAds;
+import com.huawei.hms.ads.banner.BannerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,17 +44,21 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout layout_email, layout_psw;
     private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
+    private BannerView bannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        HwAds.init(this);
         init();
+        configBanner();
         setInfoAccount();
         event();
     }
 
     public void init() {
+        bannerView = findViewById(R.id.banner_view);
         ed_email = findViewById(R.id.ed_email);
         ed_psw = findViewById(R.id.ed_psw);
         cb_remember = findViewById(R.id.cb_remember);
@@ -67,6 +75,12 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage(Constant.Title.LOADING);
 //        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         sharedPreferences = getSharedPreferences(Constant.KEY.KEY_ACCOUNT, MODE_PRIVATE);
+    }
+    private void configBanner(){
+        AdParam adParam = new AdParam.Builder().build();
+        bannerView.setBannerAdSize(BannerAdSize.BANNER_SIZE_320_50);
+        bannerView.loadAd(adParam);
+
     }
 
     private void setInfoAccount() {

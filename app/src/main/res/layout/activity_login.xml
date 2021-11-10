@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hwads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.LoginActivity">
+
+    <com.huawei.hms.ads.banner.BannerView
+        android:id="@+id/banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        hwads:adId="testw6vs28auh3"
+        />
 
     <LinearLayout
         android:id="@+id/ll_login"
@@ -23,13 +30,14 @@
             android:background="@drawable/shape_icon"
             android:src="@drawable/icon" />
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
+            hwads:errorEnabled="true"
+            hwads:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_email"
@@ -47,9 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
-            app:passwordToggleEnabled="true">
+            hwads:errorEnabled="true"
+            hwads:hintEnabled="false"
+            hwads:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_psw"

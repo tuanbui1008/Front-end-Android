@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'com.huawei.agconnect'
 }
 
 android {
@@ -53,4 +52,7 @@ dependencies {
     implementation 'com.huawei.agconnect:agconnect-core:1.5.2.300'
 
 
+    implementation 'com.huawei.hms:ads-identifier:3.4.39.302'
+    implementation 'com.huawei.hms:ads-installreferrer:3.4.39.302'
+    implementation 'com.huawei.hms:ads-lite:13.4.39.302'
 }

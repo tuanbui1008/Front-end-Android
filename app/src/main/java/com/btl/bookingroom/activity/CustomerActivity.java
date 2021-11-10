@@ -44,6 +44,8 @@ import com.btl.bookingroom.model.dbo.Customer;
 import com.btl.bookingroom.model.dbo.Hotel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.huawei.hms.ads.AdParam;
+import com.huawei.hms.ads.HwAds;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -59,7 +61,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import com.huawei.hms.ads.banner.BannerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CustomerActivity extends AppCompatActivity {
@@ -88,11 +90,13 @@ public class CustomerActivity extends AppCompatActivity {
     private List<Area> areaList;
     private List<Hotel> hotelList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private BannerView bannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+        HwAds.init(this);
         init();
         initHandler();
         getAllArea(Constant.URL_SELECT_ALL_AREA);
@@ -103,6 +107,7 @@ public class CustomerActivity extends AppCompatActivity {
     }
 
     private void init() {
+        bannerView = findViewById(R.id.banner_view);
         drawerLayout = findViewById(R.id.layout_drawer);
         nav_bar = findViewById(R.id.nav_bar);
         slide_page = findViewById(R.id.slide_page);
@@ -122,6 +127,12 @@ public class CustomerActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(CustomerActivity.this, drawerLayout, nav_bar, R.string.openDrawer, R.string.closeDrawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    private void configBanner(){
+        AdParam adParam = new AdParam.Builder().build();
+        bannerView.loadAd(adParam);
+
     }
 
     private void initHandler() {

@@ -4,8 +4,8 @@ package com.btl.bookingroom.apiSendEmail;
 import com.btl.bookingroom.constants.Constant;
 
 public class SendGmail {
-    private static final String GMAIL_ADMIN = "nhannguyen98bn@gmail.com";
-    private static final String PASSWORD_GMAIL = "nhanbn98";
+    private static final String GMAIL_ADMIN = "buiminhtuan@gmail.com";
+    private static final String PASSWORD_GMAIL = "tuanbmhd2001";
 
     public void send(String msg, String gmail) {
         new Thread(new Runnable() {
